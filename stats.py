@@ -14,3 +14,20 @@ def character_count(text: str) -> dict[str, int]:
         else:
             characters[char] = 1
     return characters
+
+
+def sort_on(text_tuple: tuple[str, int]) -> int:
+    return text_tuple[1]
+
+
+def chars_dict_to_sorted_list(characters_dictionary: dict[str, int]) -> list[tuple[str, int]]:
+    characters_list = []
+
+    for char in characters_dictionary:
+        dictionary_count = characters_dictionary[char]
+        characters_tuple = (char, dictionary_count)
+        characters_list.append(characters_tuple)
+        
+    sorted_characters_list = sorted(characters_list, reverse=True, key=sort_on)
+
+    return sorted_characters_list
