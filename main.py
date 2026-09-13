@@ -1,4 +1,10 @@
+import sys
+
 from stats import character_count, chars_dict_to_sorted_list, word_count
+
+if len(sys.argv) < 2:
+    print("Usage: python3 main.py <path_to_book>")
+    sys.exit(1)
 
 
 def get_book_text(path_to_file: str) -> str:
@@ -6,7 +12,9 @@ def get_book_text(path_to_file: str) -> str:
         return f.read()
 
 
-def print_report(book_path, word_count, sorted_list_char_count):
+def print_report(
+    book_path: str, word_count: int, sorted_list_char_count: list[tuple[str, int]]
+) -> None:
     print("============ BOOKBOT ============")
     print(f"Analyzing book found at {book_path}...")
     print("----------- Word Count ----------")
@@ -22,12 +30,10 @@ def print_report(book_path, word_count, sorted_list_char_count):
 
 
 def main() -> None:
-    book_path = "books/frankenstein.txt"
+    book_path = sys.argv[1]
     text = get_book_text(book_path)
     num_words = word_count(text)
     characters_sorted_list = chars_dict_to_sorted_list(character_count(text))
-    # print(f"Found {num_words} total words")
-    # print(characters_sorted_list)
     print_report(book_path, num_words, characters_sorted_list)
 
 
